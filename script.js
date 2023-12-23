@@ -7,11 +7,11 @@ function reload() {
     window.location.reload();
 }
 
-(async function fetchNews(query) {
+async function fetchNews(query) {
     const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
     const data = await res.json();
     bindData(data.articles);
-})
+}
 
 function bindData(articles) {
     const cardsContainer = document.getElementById("cards-container");
@@ -67,3 +67,9 @@ searchButton.addEventListener("click", () => {
     curSelectedNav?.classList.remove("active");
     curSelectedNav = null;
 });
+
+setTimeout(()=>{
+    fetchNews();
+    bindData();
+    fillDataInCard();
+},[2000])
